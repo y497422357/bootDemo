@@ -14,7 +14,7 @@ public class TeacherVO {
     private String tage;
 
     // 关联ID
-    private String course_id;
+    private int course_id;
 
 
 }
