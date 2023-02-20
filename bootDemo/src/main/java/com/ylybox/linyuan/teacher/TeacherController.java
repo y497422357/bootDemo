@@ -20,7 +20,7 @@ public class TeacherController {
     /**
      * listTeacher :  获取教师列表数据
      **/
-    @RequestMapping(value = "listTeacher", method = RequestMethod.POST)
+    @RequestMapping(value = "/listTeacher", method = RequestMethod.POST)
     public List<TeacherVO> listTeacher(@RequestBody Map<String,Object> param){
         List<TeacherVO> list = teacherService.findAll(param);
         return list;
