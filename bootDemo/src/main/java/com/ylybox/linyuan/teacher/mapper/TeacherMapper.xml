@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ylybox.linyuan.teacher.mapper.TeacherMapper">
+
+    <insert id="insert">
+        INSERT INTO d_teacher(tname,tage,course_id) VALUES(#{tname},#{tage},#{course_id})
+    </insert>
+    <update id="update">
+        UPDATE d_teacher
+        <set>
+            <if test="tname != null and tname != ''">
+                tname=#{tname},
+            </if>
+            <if test="tage != null and tage != ''">
+                tage=#{tage},
+            </if>
+            <if test="course_id != null and course_id != ''">
+                course_id=#{course_id}
+            </if>
+        </set>
+        <where>
+             id=#{id}
+        </where>
+    </update>
+    <delete id="delete">
+        DELETE FROM d_teacher WHERE id=#{id}
+
+    </delete>
+    <select id="listTeacher" parameterType="java.util.Map" resultType="com.ylybox.linyuan.teacher.Bean.TeacherVO">
+        select
+            t.id,
+            t.tage,
+            t.tname,
+            t.course_id
+        from
+            d_teacher t
+        where 1=1
+        <if test="tname != null and tname !=''">
+            and t.tname like concat('%',#{tname},'%')
+        </if>
+        <if test="tage != null and tage !=''">
+            and t.tage = #{tage}
+        </if>
+        <if test="course_id != null and course_id !=''">
+            and t.course_id = #{course_id}
+        </if>
+        <if test="id != null and id !=''">
+            and t.id = #{id}
+        </if>
+        <if test="pageSize != null and pageSize !=''">
+            LIMIT #{pageNum}, #{pageSize}
+        </if>
+
+    </select>
+</mapper>
